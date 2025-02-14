@@ -11,14 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('services', function (Blueprint $table) {
             $table->id();
+            $table->string('img'); // Menyimpan path gambar
             $table->string('name');
-            $table->string('email')->unique();
-            $table->string('phone');
-            $table->text('address');
+            $table->text('description');
+            $table->decimal('price', 10, 0); // Menyimpan harga dengan 2 desimal
             $table->timestamps();
         });
+
     }
 
     /**
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('services');
     }
 };
