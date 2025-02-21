@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->text('description');
             $table->decimal('price', 10, 0); // Menyimpan harga dengan 2 desimal
+            $table->softDeletes();
             $table->timestamps();
         });
 

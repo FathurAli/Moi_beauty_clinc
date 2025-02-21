@@ -16,6 +16,7 @@ return new class extends Migration
             $table->integer('admin_id');
             $table->decimal('total_income', 10, 0);
             $table->date('report_date');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
