@@ -2,18 +2,30 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class Menu extends Model
 {
     use HasFactory;
-    protected $table = 'menus';
 
+    // Tentukan kolom yang dapat diisi
     protected $fillable = [
-      'name',
-      'url',
-      'parent_id',
-      'order',
+        'name',
+        'url',
+        'parent_id',
+        'order',
     ];
+
+    // Relasi ke submenu (children)
+    public function children()
+    {
+        return $this->hasMany(Menu::class, 'parent_id')->orderBy('order');
+    }
+
+    // Relasi ke parent menu
+    public function parent()
+    {
+        return $this->belongsTo(Menu::class, 'parent_id');
+    }
 }
