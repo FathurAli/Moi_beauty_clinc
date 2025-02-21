@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('specialization');
             $table->text('schedule');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

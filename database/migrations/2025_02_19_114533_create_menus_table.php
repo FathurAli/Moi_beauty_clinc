@@ -11,13 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('admins', function (Blueprint $table) {
-            $table->id();
+        Schema::create('menus', function (Blueprint $table) {
+            $table->id(); // Primary Key
             $table->string('name');
-            $table->string('email');
-            $table->string('password');
-            $table->softDeletes();
+            $table->string('url');
+            $table->unsignedBigInteger('parent_id')->nullable();
+            $table->integer('order')->nullable();
             $table->timestamps();
+
+            // Foreign Key Constraint
+            $table->foreign('parent_id')->references('id')->on('menus')->onDelete('cascade');
         });
     }
 
@@ -26,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('admins');
+        Schema::dropIfExists('menus');
     }
 };

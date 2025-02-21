@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('status');
             $table->boolean('is_down_payment')->default(false);
             $table->decimal('remaining_amount', 10, 0);
+            $table->softDeletes();
             $table->timestamps();
         });
     }
