@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Single-Project')
+@section('title', 'Skin Booster')
 @section('content')
 <!DOCTYPE html>
 <html>
@@ -216,7 +216,7 @@
 			<div class="col-md-4 col-sm-12" style="text-align:right">
 				<div class="row">
 					<div class="uppercase gray-text">
-						created by akhouad &copy;2016. all rights reserved.
+						{{-- created by akhouad &copy;2016. all rights reserved. --}}
 					</div>
 					<ul class="social-icons" style="margin-top:30px;float:right">
 						<li><a href="#"><i class="icon ion-social-facebook"></i></a></li>

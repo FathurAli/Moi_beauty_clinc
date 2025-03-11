@@ -1,10 +1,11 @@
 @extends('layouts.app')
-@section('title', 'SERVICES')
+@section('title', 'Booking')
 @section('content')
+
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Services - AKAD - Creative Digital Agency HTML Template</title>
+	<title>Booking</title>
 	<!-- META TAGS -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -245,7 +246,7 @@
 			<div class="col-md-4 col-sm-12" style="text-align:right">
 				<div class="row">
 					<div class="uppercase gray-text">
-						created by akhouad &copy;2016. all rights reserved.
+						{{-- created by akhouad &copy;2016. all rights reserved. --}}
 					</div>
 					<ul class="social-icons" style="margin-top:30px;float:right">
 						<li><a href="#"><i class="icon ion-social-facebook"></i></a></li>

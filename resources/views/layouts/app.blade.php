@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'AKAD - Creative Digital Agency')</title>
+    <title>@yield('title', 'Moi Beauty Clinic')</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/img/favicon.ico') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/img/Moi.png') }}">
     
     <!-- Meta Tags -->
-    <meta name="author" content="Amine Akhouad">
-    <meta name="description" content="AKAD is a creative and modern template for digital agencies">
+    <meta name="author" content="Moi Beauty Clinic">
+    <meta name="description" content="Moi Beauty Clinic">
 
     <!-- CSS Files -->
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
@@ -64,7 +64,7 @@
     <!-- FOOTER -->
     <footer>
         <div class="container">
-            <p>&copy; 2024 AKAD. All rights reserved.</p>
+            <p>&copy; Moi Beauty Clinic.</p>
         </div>
     </footer>
 

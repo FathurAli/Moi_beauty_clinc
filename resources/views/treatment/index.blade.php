@@ -1,10 +1,10 @@
 @extends('layouts.app')
-@section('title', 'Portfolio-1')
+@section('title', 'Treatment')
 @section('content')
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Portfolio - AKAD - Creative Digital Agency HTML Template</title>
+	<title>Treatment</title>
 	<!-- META TAGS -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,16 +18,93 @@
 	<link rel="stylesheet" href="assets/css/animsition.min.css">
 	<link rel="stylesheet" href="assets/css/animate.css">
 	<link rel="stylesheet" href="assets/css/style.css">
-</head>
+	<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+	 <style>
+		 /* Basic styling for the slider */
+		 .swiper-container {
+			 width: 100%;
+			 height: 75vh;
+			 /* Fullscreen height */
+			 position: relative;
+			 overflow: hidden;
+		 }
+
+		 .background-slide {
+			 width: 100%;
+			 height: 100%;
+			 background-size: cover;
+			 background-position: center;
+			 display: flex;
+			 align-items: center;
+			 justify-content: center;
+			 position: relative;
+		 }
+
+		 .page-title {
+			 color: #777;
+			 text-align: center;
+			 position: relative;
+			 z-index: 10;
+			 padding: 10px 20px;
+			 border-radius: 8px;
+		 }
+
+		 .big-title {
+			 font-size: 3rem;
+			 margin-bottom: 10px;
+		 }
+
+		 .small-title {
+			 font-size: 1.2rem;
+		 }
+
+		 /* Responsive Design */
+		 @media (max-width: 768px) {
+			 .big-title {
+				 font-size: 2rem;
+			 }
+
+			 .small-title {
+				 font-size: 1rem;
+			 }
+		 }
+	 </style>
+ </head>
+
 <body class="animsition">
 	<!-- HERO SECTION  -->
-	<div class="site-hero_2">
-		<div class="page-title">
-			<div class="big-title montserrat-text uppercase">our work</div>
-			<div class="small-title montserrat-text uppercase">home / portfolio</div>
+	<div>
+		<div class="swiper-container background-swiper">
+			<div class="swiper-wrapper">
+				<!-- Slide 1 -->
+				<div class="swiper-slide">
+					<div class="background-slide" style="background-image: url('file/about/site-hero2.jpg');">
+						<div class="page-title">
+							<div class="big-title montserrat-text uppercase">Gambar Treatment</div>
+						</div>
+					</div>
+				</div>
+				<!-- Slide 2 -->
+				<div class="swiper-slide">
+					<div class="background-slide" style="background-image: url('file/about/site-hero2.jpg');">
+						<div class="page-title">
+							<div class="big-title montserrat-text uppercase">Gambar Promo Treatment</div>
+						</div>
+					</div>
+				</div>
+				<!-- Slide 3 -->
+				<div class="swiper-slide">
+					<div class="background-slide" style="background-image: url('file/about/site-hero2.jpg');">
+						<div class="page-title">
+							<div class="big-title montserrat-text uppercase">Gambar Treatment</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Pagination and Navigation -->
+			<div class="swiper-pagination"></div>
 		</div>
 	</div>
-
 
 	<!-- PORTFOLIO -->
 	<section class="portfolio">
@@ -40,12 +117,12 @@
 					<nav class="categories">
 						<ul class="portfolio_filter">
 							<li><a href="" class="active" data-filter="*">all</a></li>
-							<li><a href="" data-filter=".photography">photography</a></li>
-							<li><a href="" data-filter=".web">webdesign</a></li>
-							<li><a href="" data-filter=".logo">logo</a></li>
+							<li><a href="" data-filter=".acne">acne</a></li>
+							<li><a href="" data-filter=".skinboster">skin boster</a></li>
+							{{-- <li><a href="" data-filter=".logo">logo</a></li>
 							<li><a href="" data-filter=".graphics">graphics</a></li>
 							<li><a href="" data-filter=".ads">advertising</a></li>
-							<li><a href="" data-filter=".fashion">fashion</a></li>
+							<li><a href="" data-filter=".fashion">fashion</a></li> --}}
 						</ul>
 					</nav>
 				</div>
@@ -55,7 +132,7 @@
 			<div class="col-md-9">
 				<div class="row portfolio_container">
 					<!-- single work -->
-					<div class="col-md-4 photography">
+					<div class="col-md-4 acne">
 						<a href="single-project.html" class="portfolio_item wow fadeInUp">
 							<img src="assets/img/work-1.jpg" alt="image">
 							<div class="portfolio_item_hover">
@@ -125,7 +202,7 @@
 					<!-- end single work -->
 
 					<!-- single work -->
-					<div class="col-md-4 logo web photography">
+					<div class="col-md-4 logo skinboster acne">
 						<a href="single-project.html" class="portfolio_item wow fadeInUp" data-wow-delay=".5s">
 							<img src="assets/img/work-2.jpg" alt="image">
 							<div class="portfolio_item_hover">
@@ -153,7 +230,7 @@
 					<!-- end single work -->
 
 					<!-- single work -->
-					<div class="col-md-4 web fashion photography">
+					<div class="col-md-4 skinboster fashion acne">
 						<a href="single-project.html" class="portfolio_item wow fadeInUp" data-wow-delay=".7s">
 							<img src="assets/img/work-1.jpg" alt="image">
 							<div class="portfolio_item_hover">
@@ -256,79 +333,7 @@
 		</div>
 		<!-- end container -->
 	</section>
-	<!-- portfolio -->
-
-
-	<!-- newsletter -->
-	<section class="green-section wow fadeInUp" style="padding:50px 0">
-		<div class="container">
-			<div class="col-md-6 col-sm-12">
-				<div class="row">
-					<span class="white-text montserrat-text uppercase" style="font-size:30px;display:block;">
-						you think we're cool? let's work together
-					</span>
-					<a href="#" class="btn white" style="margin-top:30px"><span>get in touch</span></a>
-				</div>
-			</div>
-
-			<div class="col-md-6 col-sm-12">
-				<div class="row">
-					<div class="white-section" style="padding:20px">
-						<span class="montserrat-text uppercase" style="font-size:24px">stay informed with our newsletter</span>
-						<p>
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-							tempor incididunt ut labore et dolore magna aliqua.
-						</p>
-						<form action="#" method="post">
-							<div class="input_1">
-								<input type="text" name="email">
-								<span>your email</span>
-							</div>
-							<button type="submit" class="btn green" style="margin-top:20px"><span>send</span></button>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-
-
-	<!-- FOOTER -->
-	<footer class="main-footer wow fadeInUp">
-		<div class="container">
-			<div class="col-md-8 col-sm-12">
-				<div class="row">
-					<nav class="footer-nav">
-						<ul>
-							<li><a href="/" class="animsition-link link">Home</a></li>
-							<li><a href="/about" class="animsition-link link">about us</a></li>
-							<li><a href="/services" class="animsition-link link">services</a></li>
-							<li><a href="/portfolio-1" class="animsition-link link">portfolio</a></li>
-							<li><a href="/blog-1" class="animsition-link link">blog</a></li>
-							<li><a href="/contact" class="animsition-link link">contact us</a></li>
-						</ul>
-					</nav>
-				</div>
-			</div>
-
-			<div class="col-md-4 col-sm-12" style="text-align:right">
-				<div class="row">
-					<div class="uppercase gray-text">
-						created by akhouad &copy;2016. all rights reserved.
-					</div>
-					<ul class="social-icons" style="margin-top:30px;float:right">
-						<li><a href="#"><i class="icon ion-social-facebook"></i></a></li>
-						<li><a href="#"><i class="icon ion-social-twitter"></i></a></li>
-						<li><a href="#"><i class="icon ion-social-youtube"></i></a></li>
-						<li><a href="#"><i class="icon ion-social-linkedin"></i></a></li>
-						<li><a href="#"><i class="icon ion-social-pinterest"></i></a></li>
-						<li><a href="#"><i class="icon ion-social-instagram"></i></a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</footer>
-
+	
 	<!-- SCRIPTS -->
 	<script type="text/javascript" src="assets/js/jquery-2.1.4.min.js"></script>
 	<script type="text/javascript" src="assets/js/isotope.pkgd.min.js"></script>
@@ -361,6 +366,27 @@
 				return false;
 			}); 
 		});
+	</script>
+	<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+	<script>
+	  // Initialize Swiper
+	  document.addEventListener("DOMContentLoaded", function () {
+		const swiper = new Swiper('.swiper-container', {
+		  loop: true, // Enables infinite loop
+		  autoplay: {
+			delay: 5000, // Auto-slide delay in ms
+			disableOnInteraction: false, // Continue autoplay after interaction
+		  },
+		  navigation: {
+			nextEl: '.swiper-button-next',
+			prevEl: '.swiper-button-prev',
+		  },
+		  pagination: {
+			el: '.swiper-pagination',
+			clickable: true,
+		  },
+		});
+	  });
 	</script>
 </body>
 </html>
