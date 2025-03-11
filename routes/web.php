@@ -15,18 +15,6 @@ Route::get('/treatment', function () {
     return view('treatment.index');
 })->name('treatment');
 
-Route::get('/treatment1', function () {
-    return view('treatment.treatment1');
-})->name('treatment1');
-
-Route::get('/treatment2', function () {
-    return view('treatment.treatment2');
-})->name('treatment2');
-
-Route::get('/treatment3', function () {
-    return view('treatment.treatment3');
-})->name('treatment3');
-
 Route::get('/contact', function () {
     return view('contact.index');
 })->name('contact');
