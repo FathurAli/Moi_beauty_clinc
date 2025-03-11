@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('services', function (Blueprint $table) {
             $table->id();
             $table->string('img'); // Menyimpan path gambar
+            $table->integer('stock');
             $table->string('name');
             $table->text('description');
             $table->decimal('price', 10, 0); // Menyimpan harga dengan 2 desimal

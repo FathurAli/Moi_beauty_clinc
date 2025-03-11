@@ -27,6 +27,7 @@ class ServiceController extends Controller
             // Validasi input
             $request->validate([
                 'img' => 'required|mimes:jpg,jpeg,png|max:2048', // Hanya gambar dengan ukuran max 2MB
+                'stock' => 'required|integer',
                 'name' => 'required|string',
                 'description' => 'required|string',
                 'price' => 'required|numeric',
@@ -35,7 +36,7 @@ class ServiceController extends Controller
             // Simpan file gambar dengan nama asli
             if ($request->hasFile('img')) {
                 $originalName = $request->file('img')->getClientOriginalName(); // Ambil nama asli file
-                $imgPath = $request->file('img')->storeAs('store/services', $originalName, 'public');
+                $imgPath = $request->file('img')->storeAs('store/services/', $originalName, 'public');
                 $imgName = basename($imgPath); // Ambil hanya nama file
             } else {
                 return ApiFormatter::sendResponse(400, 'Image not found');
@@ -44,6 +45,7 @@ class ServiceController extends Controller
             // Simpan data ke database
             $data = Service::create([
                 'name' => $request->name,
+                'stock' => $request->stock,
                 'description' => $request->description,
                 'price' => $request->price,
                 'img' => $imgName, // Simpan hanya nama file asli
@@ -60,7 +62,8 @@ class ServiceController extends Controller
         try {
             // Validasi input
             $request->validate([
-                'img' => 'nullable|mimes:jpg,jpeg,png|max:2048', // Gambar opsional, max 2MB
+                'img' => 'required|mimes:jpg,jpeg,png|max:2048', // Gambar opsional, max 2MB
+                'stock' => 'required|integer',
                 'name' => 'required|string',
                 'description' => 'required|string',
                 'price' => 'required|numeric',
@@ -86,7 +89,8 @@ class ServiceController extends Controller
 
             // Update data di database
             $data->update([
-                'img' => $imgName, // Simpan nama file baru atau tetap pakai yang lama
+                'img' => $imgName, // Simpan nama file baru
+                'stock' => $request->stock,
                 'name' => $request->name,
                 'description' => $request->description,
                 'price' => $request->price,
