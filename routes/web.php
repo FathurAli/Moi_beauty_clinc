@@ -4,39 +4,23 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Modules\Service\ServiceController;
 
 Route::get('/', function () {
-    return view('index');
+    return view('home.index');
 });
 
-Route::get('/about', function () {
-    return view('about');
-})->name('about');
+Route::get('/doctor', function () {
+    return view('doctor.index');
+})->name('doctor');
 
-Route::get('/services', function () {
-    return view('services');
-})->name('services');
+Route::get('/treatment', function () {
+    return view('treatment.index');
+})->name('treatment');
 
-Route::get('/portfolio-1', function () {
-    return view('portfolio-1');
-})->name('portfolio-1');
-
-Route::get('/single-project', function () {
-    return view('single-project');
-})->name('single-project');
-
-Route::get('/single-project-2', function () {
-    return view('single-project-2');
-})->name('single-project-2');
-
-Route::get('/blog-1', function () {
-    return view('blog-1');
-})->name('blog-1');
-
-Route::get('/single-post', function () {
-    return view('single-post');
-})->name('single-post');
+Route::get('/booking', function () {
+    return view('booking.index');
+})->name('booking');
 
 Route::get('/contact', function () {
-    return view('contact');
+    return view('contact.index');
 })->name('contact');
 
 Route::prefix('services')->group(function () {
