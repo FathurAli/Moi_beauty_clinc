@@ -15,10 +15,6 @@ Route::get('/treatment', function () {
     return view('treatment.index');
 })->name('treatment');
 
-Route::get('/booking', function () {
-    return view('booking.index');
-})->name('booking');
-
 Route::get('/contact', function () {
     return view('contact.index');
 })->name('contact');
