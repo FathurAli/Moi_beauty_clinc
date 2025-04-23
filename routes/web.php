@@ -2,49 +2,37 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Modules\Service\ServiceController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DoctorController;
+use App\Http\Middleware\AdminMiddleware;
 
-Route::get('/', function () {
-    return view('index');
-});
+// Halaman Utama & Publik
+Route::view('/', 'index');
+Route::view('/about', 'about')->name('about');
+Route::view('/services', 'services')->name('services');
+Route::view('/portfolio-1', 'portfolio-1')->name('portfolio-1');
+Route::view('/single-project', 'single-project')->name('single-project');
+Route::view('/single-project-2', 'single-project-2')->name('single-project-2');
+Route::view('/blog-1', 'blog-1')->name('blog-1');
+Route::view('/single-post', 'single-post')->name('single-post');
+Route::view('/contact', 'contact')->name('contact');
 
-Route::get('/about', function () {
-    return view('about');
-})->name('about');
+// Autentikasi
+Route::get('/login', [AuthController::class, 'loginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login.post');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/services', function () {
-    return view('services');
-})->name('services');
+// Middleware untuk Admin
+Route::middleware([AdminMiddleware::class])->prefix('admin')->group(function () {
+    Route::view('/dashboard', 'admin.dashboard')->name('admin.dashboard');
+    
 
-Route::get('/portfolio-1', function () {
-    return view('portfolio-1');
-})->name('portfolio-1');
+    // CRUD Doctors
+    Route::resource('doctors', DoctorController::class);
+    Route::resource('services', ServiceController::class);
+    Route::get('services/data', [ServiceController::class, 'getData'])->name('admin.services.data');
 
-Route::get('/single-project', function () {
-    return view('single-project');
-})->name('single-project');
 
-Route::get('/single-project-2', function () {
-    return view('single-project-2');
-})->name('single-project-2');
-
-Route::get('/blog-1', function () {
-    return view('blog-1');
-})->name('blog-1');
-
-Route::get('/single-post', function () {
-    return view('single-post');
-})->name('single-post');
-
-Route::get('/contact', function () {
-    return view('contact');
-})->name('contact');
-
-Route::prefix('services')->group(function () {
-    Route::get('/data', [ServiceController::class, 'index']);
-    Route::post('/store', [ServiceController::class, 'store'])->withoutMiddleware([\Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class]);
-    Route::patch('/update/{id}', [ServiceController::class, 'update'])->withoutMiddleware([\Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class]);
-    Route::get('/show/{id}', [ServiceController::class, 'show']);
-    Route::delete('/delete/{id}', [ServiceController::class, 'destroy'])->withoutMiddleware([\Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class]);
-    Route::get('/restore/{id}', [ServiceController::class, 'restore']);
-    Route::delete('/deletepermanent/{id}', [ServiceController::class, 'forceDeletes'])->withoutMiddleware([\Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class]);
-});
+    // CRUD Services
+   // web.ph
+    });

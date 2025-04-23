@@ -10,83 +10,84 @@ use App\Http\Controllers\Controller;
 class ServiceController extends Controller
 {
     public function index()
-    {
-        try {
-            // $data = Service::with('Admin')->get();
-            $data = Service::all();
+{
+    $services = Service::all(); // ambil semua data layanan
+    return view('admin.services.index', compact('services'));
+}
+    
 
-            return ApiFormatter::sendResponse(200, 'Successfully get data', $data);
-        } catch (\Exception $err) {
-            return ApiFormatter::sendResponse(400, 'Not found', $err->getMessage());
-        }
+    public function create()
+    {
+        return view('admin.services.create');
+    }
+
+    public function edit($id)
+    {
+        $service = Service::findOrFail($id);
+        return view('admin.services.edit', compact('service'));
     }
 
     public function store(Request $request)
     {
-        try {
-            // Validasi input
-            $request->validate([
-                'img' => 'required|mimes:jpg,jpeg,png|max:2048', // Hanya gambar dengan ukuran max 2MB
-                'name' => 'required|string',
-                'description' => 'required|string',
-                'price' => 'required|numeric',
-            ]);
+        // Validasi input
+        $request->validate([
+            'img' => 'required|mimes:jpg,jpeg,png|max:2048',
+            'name' => 'required|string',
+            'description' => 'required|string',
+            'price' => 'required|numeric',
+        ]);
     
-            // Simpan file gambar dengan nama asli
+        try {
+            // Simpan file gambar
+            $imgName = null;
             if ($request->hasFile('img')) {
-                $originalName = $request->file('img')->getClientOriginalName(); // Ambil nama asli file
+                $originalName = $request->file('img')->getClientOriginalName();
                 $imgPath = $request->file('img')->storeAs('store/services', $originalName, 'public');
-                $imgName = basename($imgPath); // Ambil hanya nama file
-            } else {
-                return ApiFormatter::sendResponse(400, 'Image not found');
+                $imgName = basename($imgPath);
             }
     
-            // Simpan data ke database
-            $data = Service::create([
+            // Simpan ke database
+            Service::create([
                 'name' => $request->name,
                 'description' => $request->description,
                 'price' => $request->price,
-                'img' => $imgName, // Simpan hanya nama file asli
+                'img' => $imgName,
             ]);
     
-            return ApiFormatter::sendResponse(200, 'Data successfully created', $data);
-        } catch (\Exception $err) {
-            return ApiFormatter::sendResponse(400, 'Not found', $err->getMessage());
+            // Redirect ke halaman index dengan pesan sukses
+            return redirect()->route('services.index')->with('success', 'Layanan berhasil ditambahkan.');
+        } catch (\Exception $e) {
+            // Redirect kembali dengan pesan error
+            return redirect()->back()->with('error', 'Terjadi kesalahan saat menyimpan data: ' . $e->getMessage());
         }
     }
+    
 
     public function update(Request $request, $id)
     {
         try {
-            // Validasi input
             $request->validate([
-                'img' => 'nullable|mimes:jpg,jpeg,png|max:2048', // Gambar opsional, max 2MB
+                'img' => 'nullable|mimes:jpg,jpeg,png|max:2048',
                 'name' => 'required|string',
                 'description' => 'required|string',
                 'price' => 'required|numeric',
             ]);
 
-            // Ambil data berdasarkan ID
             $data = Service::findOrFail($id);
 
-            // Cek apakah ada file gambar baru yang di-upload
             if ($request->hasFile('img')) {
-                // Hapus gambar lama dari storage
                 if ($data->img) {
                     \Storage::disk('public')->delete('store/services/' . $data->img);
                 }
 
-                // Simpan gambar baru dengan nama asli tanpa tambahan waktu
                 $imgName = $request->file('img')->getClientOriginalName();
                 $request->file('img')->storeAs('store/services', $imgName, 'public');
             } else {
-                // Jika tidak ada gambar baru, gunakan gambar lama
                 $imgName = $data->img;
             }
 
-            // Update data di database
             $data->update([
-                'img' => $imgName, // Simpan nama file baru atau tetap pakai yang lama
+                'img' => $imgName,
                 'name' => $request->name,
                 'description' => $request->description,
                 'price' => $request->price,
@@ -97,7 +98,6 @@ class ServiceController extends Controller
             return ApiFormatter::sendResponse(400, 'Not found', $err->getMessage());
         }
     }
-
 
     public function show($id)
     {
@@ -115,7 +115,7 @@ class ServiceController extends Controller
             $data = Service::findOrFail($id);
             $data->delete();
             return ApiFormatter::sendResponse(200, 'Data successfully delete', $data);
-        } catch (\exception $err) {
+        } catch (\Exception $err) {
             return ApiFormatter::sendResponse(400, 'Not found', $err->getMessage());
         }
     }
@@ -127,7 +127,7 @@ class ServiceController extends Controller
             $data->restore();
             return ApiFormatter::sendResponse(200, 'Data successfully restore', $data);
         } catch (\Exception $err) {
-            return ApiFormatter::sendResponse(404, 'not found', $err->getMessage);
+            return ApiFormatter::sendResponse(404, 'not found', $err->getMessage());
         }
     }
 
@@ -138,7 +138,7 @@ class ServiceController extends Controller
             $data->forceDelete();
             return ApiFormatter::sendResponse(200, 'Data Successfully forceDeletes', $data);
         } catch (\Exception $err) {
-            return ApiFormatter::sendResponse(404, 'not found', $err->getMessage);
+            return ApiFormatter::sendResponse(404, 'not found', $err->getMessage());
         }
     }
 }

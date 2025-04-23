@@ -26,8 +26,7 @@
 	<div class="site-hero">
 		<ul class="slides">
 			<li>
-				<div><span class="small-title uppercase montserrat-text">we're</span></div>
-				<div class="big-title uppercase montserrat-text">digital agency</div>
+				<div class="big-title uppercase montserrat-text">Gambar Treatmen</div>
 				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 				tempor incididunt ut labore et dolore magna aliqua.</p>
 			</li>
@@ -356,7 +355,7 @@
 					<nav class="footer-nav">
 						<ul>
 							<li><a href="index.blade.php" class="animsition-link link">Home</a></li>
-							<li><a href="about.blade.php" class="animsition-link link">about us</a></li>
+							<li><a href="about.blade.php" class="animsition-link link">Location & Doctor</a></li>
 							<li><a href="services.blade.php" class="animsition-link link">services</a></li>
 							<li><a href="portfolio-1.blade.php" class="animsition-link link">portfolio</a></li>
 							<li><a href="blog-1.blade.php" class="animsition-link link">blog</a></li>

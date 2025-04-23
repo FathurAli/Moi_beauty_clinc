@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/animsition.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/animate.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    <script src="https://kit.fontawesome.com/YOUR-FONTAWESOME-KEY.js" crossorigin="anonymous"></script>
 </head>
 <body class="animsition">
     <!-- HEADER (Navbar) -->
@@ -28,26 +29,31 @@
                 <a href="/"><img src="{{ asset('assets/img/logo.png') }}" alt="logo"></a>
             </div>
             <div class="menu">
-                <!-- Desktop Navbar -->
                 <nav class="desktop-nav">
                     <ul class="first-level">
+                        @php
+                            $menuItems = [
+                                ['name' => 'Home', 'url' => url('/')],
+                                ['name' => 'About', 'url' => url('/about')],
+                                ['name' => 'Services', 'url' => url('/services')],
+                                ['name' => 'Portfolio', 'url' => url('/portfolio')],
+                                ['name' => 'Contact', 'url' => url('/contact')],
+                            ];
+                            $menuNames = [
+                                'Home' => 'Home',
+                                'About' => 'Location & Doctor',
+                                'Services' => 'Treatment',
+                                'Portfolio' => 'Booking',
+                                'Contact' => 'Contact Us',
+                            ];
+                        @endphp
                         @foreach ($menuItems as $item)
                             <li>
-                                <a href="{{ $item['url'] }}" class="animsition-link">{{ $item['name'] }}</a>
-                                @if (!empty($item['children']))
-                                    <ul class="second-level">
-                                        @foreach ($item['children'] as $child)
-                                            <li>
-                                                <a href="{{ $child['url'] }}" class="animsition-link">{{ $child['name'] }}</a>
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                @endif
+                                <a href="{{ $item['url'] }}" class="animsition-link">{{ $menuNames[$item['name']] ?? $item['name'] }}</a>
                             </li>
                         @endforeach
                     </ul>
                 </nav>
-                <!-- Mobile Navbar -->
                 <nav class="mobile-nav"></nav>
                 <div class="menu-icon">
                     <div class="line"></div>
@@ -58,8 +64,39 @@
         </div>
     </header>
 
-    <!-- Page Content -->
-    @yield('content')
+    <div class="container-fluid">
+        <div class="row">
+            @if(Auth::check() && Auth::user()->isAdmin()) 
+                <div class="col-md-2 sidebar">
+                    <h3 class="text-center">Admin Panel</h3>
+                    <hr>
+                    <a href="{{ route('admin.dashboard') }}">
+                        <i class="fa-solid fa-gauge-high"></i> Dashboard
+                    </a>
+                    <a href="{{ route('doctors.index') }}">
+                        <i class="fa-solid fa-user-doctor"></i> Doctors
+                    </a>
+                    <a href="{{ url('admin/services/data') }}">
+                        <i class="fa-solid fa-hand-holding-medical"></i> Services
+                    </a>
+                    <hr>
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="btn btn-danger w-100">
+                            <i class="fa-solid fa-right-from-bracket"></i> Logout
+                        </button>
+                    </form>
+                </div>
+                <div class="col-md-10">
+                    @yield('content')
+                </div>
+            @else
+                <div class="col-md-12">
+                    @yield('content')
+                </div>
+            @endif
+        </div>
+    </div>
 
     <!-- FOOTER -->
     <footer>
@@ -79,17 +116,12 @@
     <!-- Initialize Scripts -->
     <script>
         $(document).ready(function () {
-            // Initialize WOW.js for animations
             new WOW().init();
-
-            // Initialize FlexSlider
             $('.flexslider').flexslider({
                 animation: "slide",
                 controlNav: false,
                 directionNav: true,
             });
-
-            // Mobile menu toggle
             $('.menu-icon').on('click', function () {
                 $('.mobile-nav').toggleClass('open');
             });
